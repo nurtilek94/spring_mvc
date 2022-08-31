@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+    <style>table,
+    td {
+        border: 1px solid #333;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+    }
+
+    thead,
+    tfoot {
+        background-color: #e8e5e5;
+        color: #344712;
+    }
+    </style>
+    <style>
+        table, th, td{
+            border: 1px solid #1e1818;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">course name</th>
+        <th scope="col">date</th>
+        <th scope="col">duration</th>
+        <th scope="col">Image</th>
+<!--        <th scope="col">Assign Instructor to Course</th>-->
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Lesson</th>
+    </tr>
+    </thead>
+
+    <tbody class="table-success">
+    <tr th:each="course : ${courses}">
+        <td th:text="${course.id}"></td>
+        <td th:text="${course.courseName}"></td>
+        <td th:text="${course.dateOfStart}"></td>
+        <td th:text="${course.duration}"></td>
+        <td th:text="${course.image}"></td>
+<!--        <td>-->
+<!--            <form th:method="POST"-->
+<!--                  th:action="@{/courses/{companyId}/{courseId}/saveAssign(courseId=${course.getId()}, companyId=${companyId})}">-->
+<!--                <select name="instructor" class="form-select form-select-sm"  aria-label=".form-select-sm example" th:object="${inst}" th:field="*{id}">-->
+<!--                    <option th:each="instructor : ${instructors}"-->
+<!--                            th:value="${instructor.id}"-->
+<!--                            th:text="${instructor.firstName}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <input type="submit" value="submit" style="height: 30px;width: 60px; background: azure"/>-->
+<!--            </form>-->
+<!--        </td>-->
+
+
+
+        <td><a th:href="@{/courses/updateCourse/{id}/(id=${course.getId()})}">
+            <button style="height: 40px; width: 80px; background-color:blue;">update</button>
+        </a>
+        </td>
+        <td><form th:method="DELETE" th:action="@{/courses/{id}/{compId}(id=${course.getId()},compId=${companyId})}">
+            <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
+        </form></td>
+
+
+        <td><a th:href="@{/lessons/allLessons/{courseId}(courseId=${course.getId()})}">
+            <button style="height: 40px; width: 80px; background-color:blue;">lesson</button>
+        </a>
+        </td>
+<!--        <td> <a th:href="@{/courses/allCourses/{companyId}(companyId=${course.getId()})}">-->
+<!--            <input type="submit" value="Instructor" style="height: 40px; width: 80px;background: lightcoral;"/>-->
+<!--        </a>-->
+<!--        </td>-->
+
+    </tr>
+
+
+    </tbody>
+</table>
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/courses/{id}/addCourse(id=${companyId})}">
+        <button style = "font-size:30px;">Add course</button>
+    </a>
+</div>
+
+
+
+<table class="table table-bordered ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Specialization</th>
+        <th scope="col">update</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+
+    <div th:each="instructor:${instructors}">
+        <tbody class="table-success">
+        <tr>
+            <th scope="row" th:text="${instructor.getId()}"></th>
+            <td th:text="${instructor.getFirstName()}"></td>
+            <td th:text="${instructor.getLastName()}"></td>
+            <td th:text="${instructor.getPhoneNumber()}"></td>
+            <td th:text="${instructor.getEmail()}"></td>
+            <td th:text="${instructor.getSpecialization()}"></td>
+
+
+                    <td><a th:href="@{/instructors/updateInstructor/{id}/(id=${instructor.getId()})}">
+                        <button style="height: 40px; width: 80px; background-color:blue;">update</button>
+                    </a>
+                    </td>
+                    <td><form th:method="DELETE" th:action="@{/instructors/{id}/{companyId}(id=${instructor.getId()},companyId=${companyId})}">
+                        <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
+                    </form></td>
+                    </a>
+                    </td>
+
+                    </td>
+        </tr>
+        </tbody>
+    </div>
+
+</table>
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/instructors/{id}/addInstructor(id=${companyId})}">
+        <button style = "font-size:30px;">Add Instructor</button></a></div>
+
+
+<br><br><br>
+
+
+<table class="table table-bordered ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First name</th>
+        <th scope="col">Last name</th>
+        <th scope="col">Phone number</th>
+        <th scope="col">Email</th>
+        <th scope="col">study format</th>
+        <th scope="col">update</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+
+    <div th:each="student:${students}">
+        <tbody class="table-success">
+        <tr>
+            <th scope="row" th:text="${student.getId()}"></th>
+            <td th:text="${student.getFirstName()}"></td>
+            <td th:text="${student.getLastName()}"></td>
+            <td th:text="${student.getPhoneNumber()}"></td>
+            <td th:text="${student.getEmail()}"></td>
+            <td th:text="${student.getStudyFormat()}"></td>
+
+
+            <td><a th:href="@{/students/updateStudent/{id}(id=${student.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:blue;">update</button>
+            </a>
+            </td>
+            <td><form th:method="DELETE" th:action="@{/students/{id}/{companyId}(id=${student.getId()},companyId=${companyId})}">
+                <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
+            </form></td>
+
+        </tr>
+        </tbody>
+    </div>
+
+</table>
+
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/students/{id}/addStudent(id=${companyId})}">
+        <button style = "font-size:30px;">Add student</button></a></div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+

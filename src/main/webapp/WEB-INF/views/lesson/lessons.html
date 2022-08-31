@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+    <style>table,
+    td {
+        border: 1px solid #333;
+        margin-top: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+    }
+
+    thead,
+    tfoot {
+        background-color: #e8e5e5;
+        color: #344712;
+    }
+    </style>
+    <style>
+        table, th, td {
+            border: 1px solid #1e1818;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+<table class="table table-bordered ">
+    <thead class="table-dark">
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Lesson name</th>
+        <th scope="col">Course</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+        <th scope="col">Task</th>
+    </tr>
+    </thead>
+<tbody>
+<tr th:each="lesson:${allLessons}">
+            <th scope="row" th:text="${lesson.getId()}"></th>
+            <th th:text="${lesson.lessonName}"></th>
+            <th th:text="${lesson.getCourse().getCourseName()}"></th>
+
+            <td><a th:href="@{/lessons/updateLesson/{lessonId}(lessonId=${lesson.getId()})}">
+                <button style="height: 40px; width: 80px; background-color:blue;">update</button>
+            </a>
+            </td>
+            <td><form th:method="DELETE" th:action="@{/lessons/{courseId}/{lessonId}/deleteLesson(courseId=${courseId},lessonId=${lesson.getId()})}">
+                <input type="submit" value="Delete" style="height: 40px; width: 80px; background-color:darkorange;"/>
+            </form></td>
+
+    <td><a th:href="@{/videos/videos/{id}(id=${lesson.getId()})}">
+        <button style="height: 40px; width: 90px; background-color:paleturquoise;">Videos</button>
+    </a>
+    </td>
+
+    <td><a th:href="@{/tasks/allTask/{id}(id=${lesson.getId()})}">
+        <button style="height: 40px; width: 90px; background-color:paleturquoise;">Task </button>
+    </a>
+    </td>
+
+        </tr>
+        </tbody>
+
+
+
+</table>
+
+<br><br><br><br>
+<div style = "text-align:center; ">
+    <a th:href="@{/lessons/{courseId}/newLesson(courseId=${courseId})}">
+        <button style = "font-size:30px;">Add lesson</button></a></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+

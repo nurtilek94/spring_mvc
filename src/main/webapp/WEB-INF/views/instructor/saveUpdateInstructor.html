@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Course</title>
+</head>
+<body>
+<form th:action="@{/instructors/{id}/{instructorId}/saveUpdateInstructor (id =${companyId},instructorId= ${instructor.id})}"
+      th:object="${instructor}"
+      th:method="patch">
+    <div>
+        <label>
+            <input th:field="*{firstName}" >
+        </label>
+    </div>
+    <div>
+        <input th:field="*{lastName}">
+    </div>
+    <div>
+        <input th:field="*{phoneNumber}">
+    </div>
+    <div>
+        <input th:field="*{email}">
+    </div>
+    <div>
+        <input th:field="*{specialization}">
+    </div>
+    <div>
+
+        <input type="submit" value="update">
+    </div>
+</form>
+</body>
+</html>
